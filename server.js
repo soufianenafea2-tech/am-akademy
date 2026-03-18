@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 // ── MIDDLEWARE ──────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // ── DATABASE SETUP ──────────────────────────────────────────
 const db = new Database('./am_academy.db');
@@ -186,7 +186,7 @@ app.put('/api/settings', (req, res) => {
 
 // Catch-all: serve index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // ── START SERVER ────────────────────────────────────────────
