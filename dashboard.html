@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AM Academy – لوحة التحكم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C62828; --red-dark: #8E0000; --red-light: #FF5252;
+    --dark: #0D0D0D; --dark2: #141414; --dark3: #1C1C1C; --dark4: #242424;
+    --gold: #D4A017; --white: #FFFFFF;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Cairo',sans-serif; background:var(--dark2); color:var(--white); min-height:100vh; }
+  .sidebar {
+    position:fixed; top:0; right:0; width:240px; height:100vh;
+    background:var(--dark); border-left:1px solid rgba(255,255,255,0.06);
+    padding:24px 16px; display:flex; flex-direction:column; gap:8px;
+  }
+  .sidebar-logo {
+    font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700;
+    color:var(--white); letter-spacing:2px; padding:0 8px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:8px;
+  }
+  .sidebar-logo span { color:var(--red); }
+  .nav-item {
+    display:flex; align-items:center; gap:12px; padding:10px 12px;
+    border-radius:6px; cursor:pointer; font-size:14px; color:#aaa;
+    transition:all 0.2s; text-decoration:none;
+  }
+  .nav-item:hover, .nav-item.active { background:rgba(198,40,40,0.15); color:var(--white); }
+  .nav-item.active { border-right:3px solid var(--red); }
+  .main { margin-right:240px; padding:32px; }
+  .topbar {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:32px;
+  }
+  .topbar h1 { font-size:24px; font-weight:700; }
+  .topbar-actions { display:flex; gap:12px; }
+  .btn {
+    padding:8px 20px; border-radius:4px; border:none; cursor:pointer;
+    font-family:'Cairo',sans-serif; font-size:13px; font-weight:600; transition:all 0.2s;
+  }
+  .btn-red { background:var(--red); color:#fff; }
+  .btn-red:hover { background:var(--red-dark); }
+  .btn-ghost { background:transparent; color:#aaa; border:1px solid rgba(255,255,255,0.1); }
+  .btn-ghost:hover { border-color:var(--red); color:var(--white); }
+  .stats-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px;
+  }
+  .stat-card {
+    background:var(--dark3); border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px; padding:20px;
+  }
+  .stat-card-label { font-size:12px; color:#666; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; }
+  .stat-card-num { font-size:32px; font-weight:700; color:var(--white); }
+  .stat-card-num.red { color:var(--red); }
+  .stat-card-num.gold { color:var(--gold); }
+  .stat-card-sub { font-size:12px; color:#555; margin-top:4px; }
+  .table-card {
+    background:var(--dark3); border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px; overflow:hidden;
+  }
+  .table-header {
+    padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.06);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .table-header h2 { font-size:16px; font-weight:600; }
+  .search-input {
+    background:var(--dark4); border:1px solid rgba(255,255,255,0.1);
+    border-radius:6px; padding:8px 14px; color:var(--white);
+    font-family:'Cairo',sans-serif; font-size:13px; outline:none; width:220px;
+  }
+  .search-input:focus { border-color:var(--red); }
+  table { width:100%; border-collapse:collapse; }
+  th { padding:12px 16px; text-align:right; font-size:12px; color:#666; font-weight:600; letter-spacing:0.5px; border-bottom:1px solid rgba(255,255,255,0.04); }
+  td { padding:13px 16px; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); }
+  tr:hover td { background:rgba(255,255,255,0.02); }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:2px;
+    font-size:11px; font-weight:600;
+  }
+  .badge-new { background:rgba(198,40,40,0.15); color:var(--red-light); border:1px solid rgba(198,40,40,0.3); }
+  .badge-done { background:rgba(76,175,80,0.1); color:#81c784; border:1px solid rgba(76,175,80,0.2); }
+  .badge-pending { background:rgba(212,160,23,0.1); color:#ffd54f; border:1px solid rgba(212,160,23,0.2); }
+  .action-btn {
+    background:transparent; border:1px solid rgba(255,255,255,0.08); border-radius:4px;
+    color:#aaa; padding:4px 10px; font-size:12px; cursor:pointer; transition:all 0.2s;
+    font-family:'Cairo',sans-serif;
+  }
+  .action-btn:hover { border-color:var(--red); color:var(--white); }
+  .action-btn.del:hover { border-color:#f44336; color:#f44336; }
+  .loading { text-align:center; padding:40px; color:#555; }
+  .empty { text-align:center; padding:40px; color:#555; font-size:14px; }
+  .filter-row { display:flex; gap:8px; padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .filter-btn {
+    padding:5px 14px; border-radius:4px; border:1px solid rgba(255,255,255,0.08);
+    background:transparent; color:#888; font-size:12px; cursor:pointer;
+    font-family:'Cairo',sans-serif; transition:all 0.2s;
+  }
+  .filter-btn.active { background:rgba(198,40,40,0.15); border-color:rgba(198,40,40,0.4); color:var(--red-light); }
+  .modal {
+    position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:200;
+    display:none; align-items:center; justify-content:center;
+  }
+  .modal.open { display:flex; }
+  .modal-box {
+    background:var(--dark3); border:1px solid rgba(198,40,40,0.2);
+    border-radius:12px; padding:32px; width:480px; max-width:90vw;
+  }
+  .modal-title { font-size:18px; font-weight:700; margin-bottom:20px; }
+  .detail-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .detail-label { color:#666; font-size:13px; }
+  .detail-val { font-size:13px; }
+  .modal-actions { display:flex; gap:12px; margin-top:20px; }
+  .notif-bar {
+    position:fixed; bottom:24px; left:24px; z-index:999;
+    background:var(--dark4); border:1px solid rgba(198,40,40,0.3);
+    border-radius:8px; padding:12px 20px; font-size:13px;
+    display:none; align-items:center; gap:8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-logo"><span>AM</span> ACADEMY</div>
+  <a href="index.html" class="nav-item">🏠 الموقع الرئيسي</a>
+  <a href="#" class="nav-item active">📊 لوحة التحكم</a>
+  <a href="#" class="nav-item" onclick="showSection('inscriptions')">📝 الطلبات</a>
+  <a href="#" class="nav-item" onclick="showSection('stats')">📈 الإحصائيات</a>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <h1>لوحة التحكم</h1>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" onclick="loadData()">🔄 تحديث</button>
+      <button class="btn btn-red" onclick="exportData()">⬇ تصدير CSV</button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-card-label">إجمالي الطلبات</div>
+      <div class="stat-card-num red" id="s-total">—</div>
+      <div class="stat-card-sub">منذ البداية</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">طلبات جديدة</div>
+      <div class="stat-card-num" id="s-new">—</div>
+      <div class="stat-card-sub">في انتظار المراجعة</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">تم التواصل</div>
+      <div class="stat-card-num gold" id="s-done">—</div>
+      <div class="stat-card-sub">طالب مسجل</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">هذا الأسبوع</div>
+      <div class="stat-card-num" id="s-week">—</div>
+      <div class="stat-card-sub">طلب جديد</div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header">
+      <h2>طلبات التسجيل</h2>
+      <input class="search-input" id="search" placeholder="🔍 بحث بالاسم أو الهاتف..." oninput="filterTable()">
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="setFilter('all',this)">الكل</button>
+      <button class="filter-btn" onclick="setFilter('جديد',this)">جديد</button>
+      <button class="filter-btn" onclick="setFilter('تم التواصل',this)">تم التواصل</button>
+      <button class="filter-btn" onclick="setFilter('معلق',this)">معلق</button>
+    </div>
+    <div id="table-container">
+      <div class="loading">⏳ جاري التحميل...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-title">تفاصيل الطلب</div>
+    <div id="modal-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-red" onclick="updateStatus(currentId,'تم التواصل')">✓ تم التواصل</button>
+      <button class="btn btn-ghost" onclick="updateStatus(currentId,'معلق')">⏸ معلق</button>
+      <button class="btn btn-ghost" onclick="closeModal()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<div class="notif-bar" id="notif"></div>
+
+<script>
+let allData = [], currentFilter = 'all', currentId = null;
+
+const NIVEAU_MAP = {
+  primaire:'ابتدائي', college:'إعدادي', bac1:'الأولى باك',
+  'bac2-sciences':'الثانية باك علوم', 'bac2-lettres':'الثانية باك أدبي', langues:'لغات'
+};
+
+async function loadData() {
+  try {
+    const res = await fetch('/api/inscriptions');
+    allData = await res.json();
+    updateStats();
+    renderTable();
+  } catch {
+    document.getElementById('table-container').innerHTML = '<div class="empty">⚠ تعذر الاتصال بالخادم<br><small>تأكد أن الخادم يعمل على المنفذ 3000</small></div>';
+  }
+}
+
+function updateStats() {
+  document.getElementById('s-total').textContent = allData.length;
+  document.getElementById('s-new').textContent = allData.filter(d=>d.statut==='جديد').length;
+  document.getElementById('s-done').textContent = allData.filter(d=>d.statut==='تم التواصل').length;
+  const week = new Date(); week.setDate(week.getDate()-7);
+  document.getElementById('s-week').textContent = allData.filter(d=>new Date(d.created_at)>week).length;
+}
+
+function renderTable() {
+  const search = document.getElementById('search').value.toLowerCase();
+  let data = allData.filter(d => {
+    const matchSearch = !search || d.nom.toLowerCase().includes(search) || d.telephone.includes(search);
+    const matchFilter = currentFilter==='all' || d.statut===currentFilter;
+    return matchSearch && matchFilter;
+  });
+  if (!data.length) {
+    document.getElementById('table-container').innerHTML = '<div class="empty">لا توجد نتائج</div>';
+    return;
+  }
+  const rows = data.map(d => `
+    <tr>
+      <td>${d.nom}</td>
+      <td>${d.telephone}</td>
+      <td>${NIVEAU_MAP[d.niveau]||d.niveau}</td>
+      <td><span class="badge badge-${d.statut==='جديد'?'new':d.statut==='تم التواصل'?'done':'pending'}">${d.statut}</span></td>
+      <td>${new Date(d.created_at).toLocaleDateString('ar-MA')}</td>
+      <td>
+        <button class="action-btn" onclick="showDetail(${d.id})">عرض</button>
+        <button class="action-btn del" onclick="deleteRecord(${d.id})">حذف</button>
+      </td>
+    </tr>
+  `).join('');
+  document.getElementById('table-container').innerHTML = `
+    <table>
+      <thead><tr>
+        <th>الاسم</th><th>الهاتف</th><th>المستوى</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function filterTable() { renderTable(); }
+function setFilter(f, btn) {
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function showDetail(id) {
+  currentId=id;
+  const d = allData.find(x=>x.id===id);
+  if(!d) return;
+  document.getElementById('modal-content').innerHTML = `
+    <div class="detail-row"><span class="detail-label">الاسم</span><span class="detail-val">${d.nom}</span></div>
+    <div class="detail-row"><span class="detail-label">الهاتف</span><span class="detail-val">${d.telephone}</span></div>
+    <div class="detail-row"><span class="detail-label">البريد</span><span class="detail-val">${d.email||'—'}</span></div>
+    <div class="detail-row"><span class="detail-label">المستوى</span><span class="detail-val">${NIVEAU_MAP[d.niveau]||d.niveau}</span></div>
+    <div class="detail-row"><span class="detail-label">الحالة</span><span class="detail-val">${d.statut}</span></div>
+    <div class="detail-row"><span class="detail-label">تاريخ التسجيل</span><span class="detail-val">${new Date(d.created_at).toLocaleString('ar-MA')}</span></div>
+    ${d.notes?`<div class="detail-row"><span class="detail-label">ملاحظات</span><span class="detail-val">${d.notes}</span></div>`:''}
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); currentId=null; }
+
+async function updateStatus(id, statut) {
+  try {
+    await fetch(`/api/inscriptions/${id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({statut}) });
+    showNotif(`✅ تم التحديث: ${statut}`);
+    closeModal(); loadData();
+  } catch { showNotif('❌ خطأ في التحديث'); }
+}
+
+async function deleteRecord(id) {
+  if (!confirm('هل تريد حذف هذا الطلب؟')) return;
+  try {
+    await fetch(`/api/inscriptions/${id}`, { method:'DELETE' });
+    showNotif('🗑 تم الحذف');
+    loadData();
+  } catch { showNotif('❌ خطأ في الحذف'); }
+}
+
+function exportData() {
+  const headers = ['الاسم','الهاتف','البريد','المستوى','الحالة','التاريخ','ملاحظات'];
+  const rows = allData.map(d=>[d.nom,d.telephone,d.email||'',NIVEAU_MAP[d.niveau]||d.niveau,d.statut,d.created_at,d.notes||''].join(','));
+  const csv = '\uFEFF' + [headers.join(','), ...rows].join('\n');
+  const a = document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='am_academy_inscriptions.csv'; a.click();
+}
+
+function showNotif(msg) {
+  const n=document.getElementById('notif'); n.textContent=msg; n.style.display='flex';
+  setTimeout(()=>n.style.display='none',3000);
+}
+
+loadData();
+</script>
+</body>
+</html>
