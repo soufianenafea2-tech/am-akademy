@@ -1,114 +1,139 @@
 /**
- * WebCraft MA – Backend Server
- * Node.js + Express + SQLite (better-sqlite3)
- * Même approche que AM Academy ✅
- *
- * Démarrer: node server.js
- * Port:     http://localhost:3000
+ * AM Academy – Backend Server
+ * Node.js + Express + SQLite
+ * 
+ * تشغيل:  node server.js
+ * المنفذ: http://localhost:3000
  */
 
-const express  = require('express');
+const express = require('express');
 const Database = require('better-sqlite3');
-const path     = require('path');
-const cors     = require('cors');
+const path = require('path');
+const cors = require('cors');
 
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ── MIDDLEWARE ──────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ── DATABASE SETUP ──────────────────────────────────────────
-const db = new Database('./webcraft.db');
-db.pragma('journal_mode = WAL');
+const db = new Database('./am_academy.db');
 
+// Enable WAL mode for better performance
+db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
+
+// Create tables
 db.exec(`
-  CREATE TABLE IF NOT EXISTS requests (
+  CREATE TABLE IF NOT EXISTS inscriptions (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    name        TEXT    NOT NULL,
-    phone       TEXT    NOT NULL,
-    email       TEXT    NOT NULL,
-    siteType    TEXT    NOT NULL,
-    budget      TEXT,
-    features    TEXT    DEFAULT '[]',
-    description TEXT,
-    statut      TEXT    DEFAULT 'nouveau',
+    nom         TEXT    NOT NULL,
+    telephone   TEXT    NOT NULL,
+    email       TEXT,
+    niveau      TEXT    NOT NULL,
+    notes       TEXT,
+    statut      TEXT    DEFAULT 'جديد',
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+
+  CREATE TABLE IF NOT EXISTS contacts (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom         TEXT    NOT NULL,
+    telephone   TEXT    NOT NULL,
+    message     TEXT,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  CREATE TABLE IF NOT EXISTS settings (
+    key   TEXT PRIMARY KEY,
+    value TEXT
+  );
 `);
 
-console.log('✅ Base de données initialisée: webcraft.db');
+// Insert default settings if not present
+const defaultSettings = {
+  academy_name: 'AM Academy',
+  address: 'حي مولاي رشيد، الدار البيضاء',
+  instagram: '@centre_am_academy',
+};
+const insertSetting = db.prepare(`INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)`);
+Object.entries(defaultSettings).forEach(([k, v]) => insertSetting.run(k, v));
+
+console.log('✅ Database initialized: am_academy.db');
 
 // ── ROUTES ─────────────────────────────────────────────────
 
-// GET toutes les demandes
-app.get('/api/requests', (req, res) => {
+// GET all inscriptions
+app.get('/api/inscriptions', (req, res) => {
   try {
-    const rows = db.prepare('SELECT * FROM requests ORDER BY created_at DESC').all();
-    // Parse features JSON
-    const data = rows.map(r => ({ ...r, features: JSON.parse(r.features || '[]') }));
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// POST nouvelle demande (depuis le formulaire client)
-app.post('/api/requests', (req, res) => {
-  try {
-    const { name, phone, email, siteType, budget, features, description } = req.body;
-
-    if (!name || !phone || !email || !siteType) {
-      return res.status(400).json({ error: 'Champs obligatoires manquants.' });
+    const { statut, niveau, search } = req.query;
+    let query = 'SELECT * FROM inscriptions WHERE 1=1';
+    const params = [];
+    if (statut) { query += ' AND statut = ?'; params.push(statut); }
+    if (niveau) { query += ' AND niveau = ?'; params.push(niveau); }
+    if (search) {
+      query += ' AND (nom LIKE ? OR telephone LIKE ? OR email LIKE ?)';
+      params.push(`%${search}%`, `%${search}%`, `%${search}%`);
     }
-
-    const stmt = db.prepare(`
-      INSERT INTO requests (name, phone, email, siteType, budget, features, description)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `);
-    const result = stmt.run(
-      name.trim(),
-      phone.trim(),
-      email.trim().toLowerCase(),
-      siteType,
-      budget || '',
-      JSON.stringify(Array.isArray(features) ? features : []),
-      (description || '').trim()
-    );
-
-    const newRow = db.prepare('SELECT * FROM requests WHERE id = ?').get(result.lastInsertRowid);
-    console.log(`[NOUVELLE DEMANDE] ${name} — ${siteType} — ${new Date().toLocaleString('fr-MA')}`);
-    res.status(201).json({ success: true, data: { ...newRow, features: JSON.parse(newRow.features) } });
-
+    query += ' ORDER BY created_at DESC';
+    const rows = db.prepare(query).all(...params);
+    res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// PATCH update statut (depuis dashboard admin)
-app.patch('/api/requests/:id', (req, res) => {
+// GET one inscription
+app.get('/api/inscriptions/:id', (req, res) => {
+  const row = db.prepare('SELECT * FROM inscriptions WHERE id = ?').get(req.params.id);
+  if (!row) return res.status(404).json({ error: 'غير موجود' });
+  res.json(row);
+});
+
+// POST new inscription
+app.post('/api/inscriptions', (req, res) => {
+  try {
+    const { nom, telephone, email, niveau, notes } = req.body;
+    if (!nom || !telephone || !niveau) {
+      return res.status(400).json({ error: 'الحقول المطلوبة: nom, telephone, niveau' });
+    }
+    const stmt = db.prepare(
+      `INSERT INTO inscriptions (nom, telephone, email, niveau, notes)
+       VALUES (?, ?, ?, ?, ?)`
+    );
+    const result = stmt.run(nom.trim(), telephone.trim(), email?.trim() || null, niveau, notes?.trim() || null);
+    const newRecord = db.prepare('SELECT * FROM inscriptions WHERE id = ?').get(result.lastInsertRowid);
+    res.status(201).json({ success: true, data: newRecord });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PATCH update statut
+app.patch('/api/inscriptions/:id', (req, res) => {
   try {
     const { statut } = req.body;
-    const valid = ['nouveau', 'en_cours', 'termine', 'annule'];
-    if (!valid.includes(statut)) {
-      return res.status(400).json({ error: 'Statut invalide.' });
+    const validStatuts = ['جديد', 'تم التواصل', 'معلق', 'ملغى'];
+    if (!validStatuts.includes(statut)) {
+      return res.status(400).json({ error: 'حالة غير صالحة' });
     }
-    db.prepare(`
-      UPDATE requests SET statut = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?
-    `).run(statut, req.params.id);
+    db.prepare(
+      `UPDATE inscriptions SET statut = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`
+    ).run(statut, req.params.id);
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// DELETE une demande
-app.delete('/api/requests/:id', (req, res) => {
+// DELETE inscription
+app.delete('/api/inscriptions/:id', (req, res) => {
   try {
-    db.prepare('DELETE FROM requests WHERE id = ?').run(req.params.id);
+    db.prepare('DELETE FROM inscriptions WHERE id = ?').run(req.params.id);
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -118,30 +143,61 @@ app.delete('/api/requests/:id', (req, res) => {
 // GET stats
 app.get('/api/stats', (req, res) => {
   try {
-    const total    = db.prepare("SELECT COUNT(*) as n FROM requests").get().n;
-    const nouveau  = db.prepare("SELECT COUNT(*) as n FROM requests WHERE statut='nouveau'").get().n;
-    const en_cours = db.prepare("SELECT COUNT(*) as n FROM requests WHERE statut='en_cours'").get().n;
-    const termine  = db.prepare("SELECT COUNT(*) as n FROM requests WHERE statut='termine'").get().n;
-    const weekAgo  = new Date(Date.now() - 7*24*3600*1000).toISOString();
-    const semaine  = db.prepare('SELECT COUNT(*) as n FROM requests WHERE created_at >= ?').get(weekAgo).n;
-    res.json({ total, nouveau, en_cours, termine, semaine });
+    const total = db.prepare('SELECT COUNT(*) as n FROM inscriptions').get().n;
+    const nouveau = db.prepare("SELECT COUNT(*) as n FROM inscriptions WHERE statut='جديد'").get().n;
+    const contacted = db.prepare("SELECT COUNT(*) as n FROM inscriptions WHERE statut='تم التواصل'").get().n;
+    const weekAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
+    const thisWeek = db.prepare('SELECT COUNT(*) as n FROM inscriptions WHERE created_at >= ?').get(weekAgo).n;
+    const byNiveau = db.prepare(
+      'SELECT niveau, COUNT(*) as count FROM inscriptions GROUP BY niveau'
+    ).all();
+    res.json({
+      total_inscriptions: total,
+      nouveau,
+      contacted,
+      this_week: thisWeek,
+      by_niveau: byNiveau,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Serve index.html pour toutes les autres routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// GET settings
+app.get('/api/settings', (req, res) => {
+  const rows = db.prepare('SELECT key, value FROM settings').all();
+  const obj = Object.fromEntries(rows.map(r => [r.key, r.value]));
+  res.json(obj);
 });
 
-// ── START ───────────────────────────────────────────────────
+// PUT settings
+app.put('/api/settings', (req, res) => {
+  try {
+    const upsert = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)');
+    const tx = db.transaction((entries) => {
+      for (const [k, v] of entries) upsert.run(k, v);
+    });
+    tx(Object.entries(req.body));
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Catch-all: serve index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// ── START SERVER ────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`
-╔══════════════════════════════════════╗
-║   🌐 WebCraft MA — Serveur           ║
-║   http://localhost:${PORT}              ║
-║   Admin: http://localhost:${PORT}/admin ║
-╚══════════════════════════════════════╝
+  ╔══════════════════════════════════════╗
+  ║   🎓 AM Academy Server Running       ║
+  ║   http://localhost:${PORT}              ║
+  ║   Dashboard: /dashboard.html         ║
+  ╚══════════════════════════════════════╝
   `);
 });
+
+module.exports = app;
