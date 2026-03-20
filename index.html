@@ -1,779 +1,568 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AM Academy – Cours du Soir | حي مولاي رشيد – الدار البيضاء | 0649183527</title>
-<meta name="description" content="AM Academy – الأوائل في دروس الدعم و التقوية. جميع المستويات: ابتدائي، إعدادي، ثانوي. حي مولاي رشيد مجموعة 4، الدار البيضاء. 0649183527">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@300;400;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --red:#C62828;--rd:#8E0000;--rl:#FF5252;
-  --gold:#D4A017;--dark:#0D0D0D;--d2:#141414;
-  --d3:#1C1C1C;--d4:#242424;--w:#FFFFFF;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Cairo',sans-serif;background:var(--dark);color:var(--w);overflow-x:hidden;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebCraft MA — Sites Web Professionnels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080b10;
+      --surface: #0f1318;
+      --border: #1e2530;
+      --accent: #e8c44a;
+      --accent2: #3b82f6;
+      --text: #e8ecf0;
+      --muted: #6b7a8d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* حل مشكلة الأرقام و الإيميلات المقلوبة */
-.nphone, .hphone span, .val.gold, .val.red, .footer-phone, .pfr, .pig {
-    unicode-bidi: plaintext;
-    text-align: right;
-    direction: ltr;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
 
-/* تجميل عرض أرقام الهاتف بشكل خاص */
-[href^="tel:"] {
-    unicode-bidi: isolate;
-    direction: ltr !important;
-    display: inline-block;
-}
-/* ─── NAV ─── */
-nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(13,13,13,.97);border-bottom:1px solid rgba(198,40,40,.2);backdrop-filter:blur(14px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:66px;}
-.nlogo{display:flex;align-items:center;gap:11px;text-decoration:none;}
-.nicon{width:40px;height:40px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:16px;color:#fff;}
-.ntxt strong{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:2px;color:var(--w);}
-.ntxt small{font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;}
-.nlinks{display:flex;gap:24px;list-style:none;align-items:center;}
-.nlinks a{color:#ccc;text-decoration:none;font-size:13px;font-weight:600;transition:color .2s;}
-.nlinks a:hover{color:var(--rl);}
-.ncta{background:var(--red)!important;color:#fff!important;padding:7px 18px;border-radius:4px;transition:background .2s!important;}
-.ncta:hover{background:var(--rd)!important;}
-.nphone{color:var(--gold)!important;font-family:'Barlow Condensed',sans-serif!important;font-size:15px!important;letter-spacing:1px;}
+    /* ---- NOISE OVERLAY ---- */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
 
-/* ─── HERO ─── */
-#hero{min-height:100vh;display:flex;align-items:center;padding:66px 5% 0;position:relative;overflow:hidden;}
-.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 108% 50%,rgba(198,40,40,.15) 0%,transparent 60%),radial-gradient(ellipse 30% 40% at -8% 80%,rgba(198,40,40,.07) 0%,transparent 50%);}
-.hgrid{position:absolute;inset:0;opacity:.035;background-image:linear-gradient(var(--w) 1px,transparent 1px),linear-gradient(90deg,var(--w) 1px,transparent 1px);background-size:55px 55px;}
-.hcontent{position:relative;z-index:2;max-width:660px;}
-.hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(198,40,40,.1);border:1px solid rgba(198,40,40,.35);color:var(--rl);font-size:11px;font-weight:700;letter-spacing:2.5px;padding:6px 16px;border-radius:2px;text-transform:uppercase;margin-bottom:26px;font-family:'Barlow Condensed',sans-serif;}
-.rdot{width:7px;height:7px;background:var(--rl);border-radius:50%;animation:blink 1.8s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.htitle{font-family:'Playfair Display',serif;font-size:clamp(46px,7.5vw,86px);font-weight:900;line-height:.92;margin-bottom:26px;}
-.htitle .tr{color:var(--red);}
-.htitle .tg{color:var(--gold);font-size:.5em;display:block;margin-top:6px;}
-.hsub{font-size:16px;color:#aaa;line-height:1.9;max-width:520px;margin-bottom:32px;}
-.hactions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
-.bp{background:var(--red);color:#fff;border:none;padding:13px 28px;font-size:15px;font-weight:700;border-radius:4px;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none;display:inline-block;}
-.bp:hover{background:var(--rd);transform:translateY(-1px);}
-.bo{background:transparent;color:var(--w);border:1px solid rgba(255,255,255,.22);padding:13px 28px;font-size:15px;font-weight:700;border-radius:4px;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none;display:inline-block;}
-.bo:hover{border-color:var(--red);color:var(--rl);}
-.hphone{display:inline-flex;align-items:center;gap:8px;color:#888;font-size:14px;}
-.hphone span{color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:1px;}
-.hstats{position:absolute;bottom:44px;right:5%;display:flex;gap:28px;}
-.hst{text-align:center;}
-.hsnum{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--red);line-height:1;}
-.hslbl{font-size:11px;color:#666;margin-top:4px;}
+    /* ---- NAV ---- */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0;
+      background: rgba(8,11,16,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+    .logo span { color: var(--text); }
+    nav a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.875rem; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .btn-nav {
+      background: var(--accent); color: #080b10 !important;
+      padding: 0.5rem 1.2rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.8rem !important;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
 
-/* ─── SHARED ─── */
-section{padding:88px 5%;}
-.stag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:12px;}
-.stitle{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.1;margin-bottom:16px;}
-.ssub{font-size:14px;color:#999;max-width:560px;line-height:1.9;}
-.fi{opacity:0;transform:translateY(24px);transition:all .6s ease;}
-.fi.v{opacity:1;transform:none;}
-.divider{width:40px;height:3px;background:var(--red);margin:12px 0 20px;}
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 88vh;
+      display: flex; align-items: center;
+      padding: 6rem 5% 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute; bottom: -300px; left: -100px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,196,74,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 700px; position: relative; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 0.4rem 1rem; border-radius: 100px;
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e; display: inline-block;
+      box-shadow: 0 0 6px #22c55e;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .line-accent { color: var(--accent); display: block; }
+    .hero p {
+      font-size: 1.1rem; color: var(--muted);
+      line-height: 1.7; max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent); color: #080b10;
+      padding: 0.9rem 2rem; border-radius: 4px;
+      font-weight: 700; font-size: 0.9rem;
+      text-transform: uppercase; letter-spacing: 1px;
+      text-decoration: none; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: #f0d060; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      padding: 0.9rem 2rem; border-radius: 4px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover { border-color: var(--muted); }
 
-/* ─── WHY ─── */
-#why{background:var(--d2);}
-.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:52px;}
-.why-card{background:var(--d3);border:1px solid rgba(198,40,40,.16);border-radius:10px;padding:28px;}
-.flist{display:flex;flex-direction:column;gap:14px;}
-.feat{display:flex;gap:12px;align-items:flex-start;padding:13px;border-radius:7px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);transition:border-color .2s;}
-.feat:hover{border-color:rgba(198,40,40,.2);}
-.fic{width:36px;height:36px;min-width:36px;background:rgba(198,40,40,.1);border:1px solid rgba(198,40,40,.22);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-.ftxt strong{display:block;font-size:13px;margin-bottom:2px;}
-.ftxt p{font-size:12px;color:#777;line-height:1.6;}
-.stats-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.sbox{background:var(--d4);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:18px;text-align:center;}
-.sbig{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1;}
-.ssmall{font-size:11px;color:#666;margin-top:4px;}
-.info-strip{background:var(--d3);border:1px solid rgba(198,40,40,.16);border-radius:8px;padding:18px;}
-.info-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;}
-.info-row:last-child{border-bottom:none;}
-.info-row .lbl{color:#777;width:120px;flex-shrink:0;font-size:12px;}
-.info-row .val{color:var(--w);font-weight:600;}
-.info-row .val.gold{color:var(--gold);}
-.info-row .val.red{color:var(--rl);}
+    /* ---- STATS ---- */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat {
+      padding: 2rem 5%;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--accent); letter-spacing: 2px;
+    }
+    .stat-label { color: var(--muted); font-size: 0.875rem; margin-top: 0.25rem; }
 
-/* ─── PROFESSORS ─── */
-#profs{background:var(--dark);}
-.profs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
-.pcard{background:var(--d3);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:22px;text-align:center;transition:all .3s;}
-.pcard:hover{border-color:rgba(198,40,40,.3);transform:translateY(-4px);}
-.pcard.star{border-color:rgba(198,40,40,.25);}
-.pav{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff;border:2px solid rgba(198,40,40,.25);}
-.pname{font-size:14px;font-weight:700;margin-bottom:3px;}
-.pfr{font-size:12px;color:var(--rl);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;}
-.pmat{font-size:11px;color:#888;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:3px 10px;border-radius:12px;display:inline-block;}
-.pig{font-size:10px;color:#555;margin-top:6px;}
-.pbadge{display:inline-block;background:rgba(198,40,40,.1);border:1px solid rgba(198,40,40,.22);color:var(--rl);font-size:9px;padding:2px 7px;border-radius:2px;margin-top:5px;}
+    /* ---- SERVICES ---- */
+    .section { padding: 6rem 5%; }
+    .section-label {
+      display: flex; align-items: center; gap: 1rem;
+      color: var(--accent); font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; max-width: 60px;
+      height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 2px; margin-bottom: 3rem;
+    }
 
-/* ─── COURSES ─── */
-#courses{background:var(--d2);}
-.levels-tabs{display:flex;gap:8px;margin:32px 0 20px;flex-wrap:wrap;}
-.ltab{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:8px 18px;color:#888;font-size:13px;font-family:'Cairo',sans-serif;cursor:pointer;transition:all .2s;}
-.ltab.active,.ltab:hover{background:rgba(198,40,40,.12);border-color:rgba(198,40,40,.35);color:var(--w);}
-.level-panel{display:none;}
-.level-panel.active{display:block;}
-.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.lcard{background:var(--d3);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:20px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;}
-.lcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
-.lcard:hover{border-color:rgba(198,40,40,.28);transform:translateY(-3px);}
-.lcard:hover::before{transform:scaleX(1);}
-.lem{font-size:26px;margin-bottom:12px;}
-.lfr{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;margin-bottom:3px;}
-.lar{font-size:12px;color:var(--gold);margin-bottom:8px;}
-.ldesc{font-size:12px;color:#777;line-height:1.7;margin-bottom:12px;}
-.tags{display:flex;flex-wrap:wrap;gap:4px;}
-.tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:10px;padding:2px 8px;border-radius:2px;color:#999;}
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      transition: background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .service-card:hover { background: #131820; }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      height: 2px; width: 0;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .service-card:hover::before { width: 100%; }
+    .service-icon {
+      font-size: 2rem; margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+    .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    .service-price {
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem; color: var(--accent);
+      letter-spacing: 1px;
+    }
 
-/* ─── SCHEDULES ─── */
-#schedules{background:var(--dark);}
-.sched-tabs{display:flex;gap:8px;margin:28px 0 20px;flex-wrap:wrap;}
-.stab{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:8px 16px;color:#888;font-size:13px;font-family:'Cairo',sans-serif;cursor:pointer;transition:all .2s;}
-.stab.active,.stab:hover{background:rgba(198,40,40,.12);border-color:rgba(198,40,40,.35);color:var(--w);}
-.sched-panel{display:none;}
-.sched-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.sched-panel.single{grid-template-columns:1fr;}
-.sched-box{background:var(--d3);border:1px solid rgba(255,255,255,.06);border-radius:8px;overflow:hidden;}
-.sched-head{background:var(--red);padding:10px 16px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:8px;}
-.sched-head .flag{font-size:16px;}
-.sched-table{width:100%;border-collapse:collapse;}
-.sched-table tr{border-bottom:1px solid rgba(255,255,255,.04);}
-.sched-table tr:last-child{border-bottom:none;}
-.sched-table td{padding:9px 14px;font-size:12px;}
-.sched-table td:first-child{color:#aaa;width:80px;}
-.sched-table td:last-child{color:#fff;direction:ltr;text-align:left;}
-.sched-table .mat{color:var(--rl);font-weight:600;}
-.sched-table .time{color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.5px;}
-.sched-table tr:hover td{background:rgba(255,255,255,.02);}
-.sched-note{background:var(--d4);border:1px solid rgba(255,255,255,.05);border-radius:6px;padding:12px 16px;font-size:12px;color:#666;margin-top:14px;display:flex;align-items:center;gap:8px;}
+    /* ---- FORM ---- */
+    #form-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: start;
+    }
+    .form-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: 2px; line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .form-info p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+    .step-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .step {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .step-num {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: var(--accent); color: #080b10;
+      border-radius: 50%; display: grid; place-items: center;
+      font-weight: 700; font-size: 0.8rem;
+    }
+    .step-text strong { display: block; margin-bottom: 0.2rem; }
+    .step-text span { color: var(--muted); font-size: 0.875rem; }
 
-/* ─── PROGRAMMES ─── */
-#programmes{background:var(--d2);}
-.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
-.prog-card{background:var(--d3);border:1px solid rgba(255,255,255,.06);border-radius:8px;overflow:hidden;}
-.prog-head{background:linear-gradient(135deg,var(--red),var(--rd));padding:14px 16px;}
-.prog-head h3{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;}
-.prog-head .prof-name{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px;}
-.prog-head .matiere{font-size:11px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:2px;display:inline-block;margin-top:4px;}
-.prog-list{padding:14px;}
-.prog-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:12px;color:#aaa;}
-.prog-item:last-child{border-bottom:none;}
-.prog-num{color:var(--red);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;width:20px;flex-shrink:0;margin-top:1px;}
+    form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    label {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+    }
+    input, select, textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.9rem 1rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232,196,74,0.1);
+    }
+    select option { background: var(--bg); }
+    textarea { resize: vertical; min-height: 120px; }
+    .checkbox-group {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; margin-top: 0.25rem;
+    }
+    .checkbox-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      cursor: pointer; padding: 0.5rem;
+      border: 1px solid var(--border); border-radius: 4px;
+      font-size: 0.875rem; color: var(--text);
+      text-transform: none; letter-spacing: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .checkbox-item:has(input:checked) {
+      border-color: var(--accent);
+      background: rgba(232,196,74,0.05);
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 16px; height: 16px; padding: 0;
+      accent-color: var(--accent);
+    }
+    .btn-submit {
+      background: var(--accent); color: #080b10;
+      padding: 1rem 2rem; border: none;
+      border-radius: 4px; font-weight: 700;
+      font-size: 1rem; text-transform: uppercase;
+      letter-spacing: 1px; cursor: pointer;
+      transition: all 0.2s; width: 100%;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-submit:hover:not(:disabled) { background: #f0d060; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* ─── INSCRIPTION ─── */
-#inscription{background:var(--dark);}
-.fwrap{max-width:680px;margin:40px auto 0;}
-.fbox{background:var(--d3);border:1px solid rgba(198,40,40,.16);border-radius:12px;padding:40px;}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.fg{display:flex;flex-direction:column;gap:6px;}
-.fg.full{grid-column:1/-1;}
-.fg label{font-size:11px;font-weight:700;color:#bbb;letter-spacing:.8px;text-transform:uppercase;}
-.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 13px;color:var(--w);font-family:'Cairo',sans-serif;font-size:13px;transition:border-color .2s;outline:none;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(198,40,40,.45);}
-.fg select option{background:#1c1c1c;}
-.fg textarea{resize:vertical;min-height:80px;}
-.fbtn{width:100%;margin-top:20px;background:var(--red);color:#fff;border:none;padding:14px;font-size:15px;font-weight:700;border-radius:6px;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
-.fbtn:hover{background:var(--rd);}
-.fok{display:none;text-align:center;padding:16px;color:#81c784;font-size:14px;font-weight:600;margin-top:12px;}
-.fphone-note{text-align:center;margin-top:16px;font-size:13px;color:#666;}
-.fphone-note span{color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;}
+    /* ---- SUCCESS MESSAGE ---- */
+    #success-msg {
+      display: none;
+      text-align: center; padding: 3rem;
+      background: rgba(34,197,94,0.05);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 8px;
+    }
+    #success-msg .check { font-size: 3rem; margin-bottom: 1rem; }
+    #success-msg h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: 1px;
+      color: #22c55e; margin-bottom: 0.5rem;
+    }
+    #success-msg p { color: var(--muted); }
 
-/* ─── CONTACT ─── */
-#contact{background:var(--d2);}
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:40px;}
-.clist{display:flex;flex-direction:column;gap:18px;}
-.ci{display:flex;gap:13px;align-items:flex-start;}
-.cic{width:40px;height:40px;min-width:40px;background:rgba(198,40,40,.1);border:1px solid rgba(198,40,40,.22);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:17px;}
-.ci strong{display:block;font-size:12px;font-weight:700;margin-bottom:3px;color:#ddd;text-transform:uppercase;letter-spacing:.5px;}
-.ci p{font-size:13px;color:#888;line-height:1.7;}
-.ci a{color:var(--rl);text-decoration:none;}
-.ci a:hover{color:var(--gold);}
-.mapbox{background:var(--d3);border:1px solid rgba(255,255,255,.05);border-radius:10px;height:290px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
-.mapbtn{background:var(--red);color:#fff;text-decoration:none;font-size:13px;padding:10px 22px;border-radius:4px;font-family:'Cairo',sans-serif;font-weight:700;transition:background .2s;}
-.mapbtn:hover{background:var(--rd);}
-.map-addr{font-size:12px;color:#888;text-align:center;line-height:1.7;}
+    /* ---- FOOTER ---- */
+    footer {
+      padding: 2.5rem 5%;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { color: var(--muted); font-size: 0.875rem; }
+    .admin-link {
+      color: var(--muted); font-size: 0.8rem;
+      text-decoration: none; opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .admin-link:hover { opacity: 1; }
 
-/* ─── INSTA ─── */
-#insta{background:var(--dark);}
-.ig-prof{max-width:460px;margin:36px auto 20px;background:var(--d3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:24px;display:flex;align-items:center;gap:18px;}
-.igav{width:68px;height:68px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#fff;flex-shrink:0;}
-.igname{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.5px;}
-.ighandle{color:var(--rl);font-size:12px;margin-bottom:6px;}
-.igmet{display:flex;gap:18px;margin:6px 0;}
-.igm{text-align:center;}
-.igm strong{display:block;font-size:16px;font-weight:700;}
-.igm span{font-size:10px;color:#666;}
-.igbio{font-size:12px;color:#aaa;line-height:1.8;direction:rtl;margin-top:8px;}
-.iglink{display:inline-block;margin-top:10px;color:var(--rl);font-size:11px;text-decoration:none;border:1px solid rgba(198,40,40,.22);padding:3px 11px;border-radius:20px;}
-.ig-highlights{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-.highlight{background:var(--d3);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 18px;text-align:center;font-size:12px;color:#aaa;min-width:80px;}
-.highlight div:first-child{font-size:22px;margin-bottom:4px;}
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * {
+      opacity: 0; animation: fadeUp 0.6s forwards;
+    }
+    .hero-badge { animation-delay: 0.1s; }
+    .hero h1 { animation-delay: 0.2s; }
+    .hero p { animation-delay: 0.35s; }
+    .hero-cta { animation-delay: 0.5s; }
 
-/* ─── FOOTER ─── */
-footer{background:#0a0a0a;border-top:1px solid rgba(255,255,255,.05);padding:32px 5%;text-align:center;color:#444;font-size:12px;}
-footer strong{color:var(--red);}
-footer a{color:var(--rl);text-decoration:none;}
-.footer-phone{font-family:'Barlow Condensed',sans-serif;font-size:20px;color:var(--gold);letter-spacing:1px;margin:8px 0;}
-
-/* ─── NOTIF ─── */
-#notif{position:fixed;bottom:22px;right:22px;z-index:999;background:#1a1a1a;border:1px solid rgba(198,40,40,.4);border-radius:8px;padding:12px 20px;display:none;align-items:center;gap:8px;color:#fff;font-size:13px;}
-#notif.ok{border-color:rgba(76,175,80,.4);}
-
-/* ─── ADMIN BAR ─── */
-.abar{background:var(--rd);padding:7px 5%;text-align:center;font-size:12px;color:rgba(255,255,255,.7);}
-.abar a{color:#fff;font-weight:700;text-decoration:none;}
-
-/* ─── MOBILE ─── */
-@media(max-width:1024px){
-  .why-grid,.cgrid{grid-template-columns:1fr;}
-  .profs-grid,.lgrid,.prog-grid{grid-template-columns:repeat(2,1fr);}
-  .sched-panel{grid-template-columns:1fr;}
-}
-@media(max-width:768px){
-  .nlinks{display:none;}
-  .hstats{position:static;margin-top:40px;justify-content:center;}
-  .profs-grid,.lgrid,.prog-grid{grid-template-columns:1fr;}
-  .fgrid{grid-template-columns:1fr;}
-  .ig-prof{flex-direction:column;text-align:center;}
-}
-</style>
+    @media (max-width: 768px) {
+      .form-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="abar">Admin: <a href="/dashboard.html">Tableau de bord →</a></div>
-
-<nav>
-  <a href="#" class="nlogo">
-    <div class="nicon">AM</div>
-    <div class="ntxt">
-      <strong>AM ACADEMY</strong>
-      <small>Cours du Soir – الدار البيضاء</small>
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Web<span>Craft</span> <span style="color:var(--muted); font-size:0.9rem;">MA</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#form-section" class="btn-nav">Demande →</a>
     </div>
-  </a>
-  <ul class="nlinks">
-    <li><a href="#why">من نحن</a></li>
-    <li><a href="#profs">الأساتذة</a></li>
-    <li><a href="#courses">المستويات</a></li>
-    <li><a href="#schedules">الجدول</a></li>
-    <li><a href="#contact">التواصل</a></li>
-    <li><a href="tel:0649183527" class="nphone">📞 0649 18 35 27</a></li>
-    <li><a href="#inscription" class="ncta">سجّل الآن</a></li>
-  </ul>
-</nav>
+  </nav>
 
-<!-- ══════ HERO ══════ -->
-<section id="hero">
-  <div class="hbg"></div><div class="hgrid"></div>
-  <div class="hcontent">
-    <div class="hbadge"><div class="rdot"></div>✨ الأوائل في دروس الدعم والتقوية · #Amfamily</div>
-    <h1 class="htitle">
-      <span class="tr">AM</span> ACADEMY
-      <span class="tg">Cours du Soir · Centre de Soutien et Langues</span>
-    </h1>
-    <p class="hsub">
-      <strong style="color:#ccc;">أساس النجاح يبدأ من هنا</strong><br>
-      نخبة من الأساتذة المعتمدين لجميع المستويات.<br>
-      <span style="color:#666;font-size:14px;">📍 حي مولاي رشيد – مجموعة 4 – خلف مقهى الطالب – الدار البيضاء</span>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Disponible pour de nouveaux projets</div>
+      <h1>
+        Sites Web
+        <span class="line-accent">Qui Vendent.</span>
+      </h1>
+      <p>
+        Du design sur-mesure au développement complet — je crée des sites web professionnels pour les entreprises marocaines qui veulent se démarquer en ligne.
+      </p>
+      <div class="hero-cta">
+        <a href="#form-section" class="btn-primary">Demander un Devis →</a>
+        <a href="#services" class="btn-secondary">Voir les services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Sites livrés</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3–7</div>
+      <div class="stat-label">Jours de livraison</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Satisfaction client</div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-label">Ce que je fais</div>
+    <h2 class="section-title">Mes Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Site Vitrine</h3>
+        <p>Présence en ligne professionnelle pour votre entreprise. Design moderne, responsive, et optimisé pour convertir les visiteurs en clients.</p>
+        <div class="service-price">À partir de 1 500 MAD</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛒</div>
+        <h3>Boutique E-commerce</h3>
+        <p>Vendez en ligne 24h/24. Catalogue produits, panier, paiement sécurisé et gestion des commandes intégrée.</p>
+        <div class="service-price">À partir de 4 000 MAD</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Landing Page</h3>
+        <p>Une page percutante pour votre campagne, produit ou service. Optimisée pour la conversion et la vitesse.</p>
+        <div class="service-price">À partir de 800 MAD</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Application Web</h3>
+        <p>Dashboard, outil métier, système de gestion — je développe des applications web sur mesure adaptées à vos besoins.</p>
+        <div class="service-price">Sur devis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section" id="form-section">
+    <div class="form-wrapper">
+      <div class="form-info">
+        <div class="section-label">Commencer</div>
+        <h2>Décrivez Votre Projet</h2>
+        <p>Remplissez ce formulaire et je vous réponds sous <strong>24h</strong> avec un devis personnalisé.</p>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <strong>Vous envoyez le formulaire</strong>
+              <span>2 minutes suffisent</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <strong>Je vous contacte sous 24h</strong>
+              <span>Par WhatsApp ou email</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>On démarre le projet</strong>
+              <span>Livraison en 3–7 jours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <form id="requestForm">
+          <div class="form-row">
+            <label>Votre Nom <input type="text" name="name" placeholder="Ahmed Benali" required /></label>
+            <label>Téléphone / WhatsApp <input type="tel" name="phone" placeholder="+212 6XX XXX XXX" required /></label>
+          </div>
+          <label>Email <input type="email" name="email" placeholder="ahmed@email.com" required /></label>
+          <label>
+            Type de Site
+            <select name="siteType" required>
+              <option value="">-- Choisissez --</option>
+              <option value="vitrine">Site Vitrine</option>
+              <option value="ecommerce">Boutique E-commerce</option>
+              <option value="landing">Landing Page</option>
+              <option value="webapp">Application Web</option>
+              <option value="autre">Autre</option>
+            </select>
+          </label>
+          <label>
+            Budget estimé
+            <select name="budget">
+              <option value="">-- Choisissez --</option>
+              <option value="moins-1500">Moins de 1 500 MAD</option>
+              <option value="1500-3000">1 500 – 3 000 MAD</option>
+              <option value="3000-6000">3 000 – 6 000 MAD</option>
+              <option value="plus-6000">Plus de 6 000 MAD</option>
+              <option value="nsp">Je ne sais pas encore</option>
+            </select>
+          </label>
+          <label>
+            Fonctionnalités souhaitées
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox" name="features" value="multilangue" /> 🌍 Multilingue</label>
+              <label class="checkbox-item"><input type="checkbox" name="features" value="blog" /> 📝 Blog</label>
+              <label class="checkbox-item"><input type="checkbox" name="features" value="contact" /> 📧 Formulaire contact</label>
+              <label class="checkbox-item"><input type="checkbox" name="features" value="seo" /> 🔍 SEO</label>
+              <label class="checkbox-item"><input type="checkbox" name="features" value="admin" /> 🔧 Panel admin</label>
+              <label class="checkbox-item"><input type="checkbox" name="features" value="paiement" /> 💳 Paiement en ligne</label>
+            </div>
+          </label>
+          <label>
+            Décrivez votre projet
+            <textarea name="description" placeholder="Parlez-moi de votre activité, vos objectifs, ce que vous voulez que le site accomplisse..."></textarea>
+          </label>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Envoyer Ma Demande →
+          </button>
+        </form>
+
+        <div id="success-msg">
+          <div class="check">✅</div>
+          <h3>Demande Envoyée !</h3>
+          <p>Je vous contacte sous 24h. Merci pour votre confiance 🙏</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p style="font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:2px;">
+      WEBCRAFT <span style="color:var(--accent)">MA</span>
     </p>
-    <div class="hactions">
-      <a href="#inscription" class="bp">سجل الآن</a>
-      <a href="#schedules" class="bo">جداول الدروس</a>
-    </div>
-    <div class="hphone">📞 للتواصل والتسجيل: <span>0649 18 35 27</span></div>
-  </div>
-  <div class="hstats">
-    <div class="hst"><div class="hsnum" id="cnt">0</div><div class="hslbl">طالب مسجل</div></div>
-    <div class="hst"><div class="hsnum">1,632</div><div class="hslbl">متابع Instagram</div></div>
-    <div class="hst"><div class="hsnum">6+</div><div class="hslbl">أستاذ معتمد</div></div>
-  </div>
-</section>
+    <p>© 2025 — Tous droits réservés</p>
+    <a href="/admin.html" class="admin-link">admin →</a>
+  </footer>
 
-<!-- ══════ WHY ══════ -->
-<section id="why">
-  <div class="stag fi">من نحن</div>
-  <h2 class="stitle fi">لماذا AM Academy؟</h2>
-  <div class="why-grid">
-    <div class="why-card fi">
-      <div class="divider"></div>
-      <div class="flist">
-        <div class="feat"><div class="fic">🏆</div><div class="ftxt"><strong>الأوائل في دروس الدعم والتقوية</strong><p>نجاحك كيبدا من هنا – معانا التفوق ماشي صدفة</p></div></div>
-        <div class="feat"><div class="fic">👨‍🏫</div><div class="ftxt"><strong>نخبة من الأساتذة المعتمدين</strong><p>فريق متكامل من أساتذة مختصين لكل مادة</p></div></div>
-        <div class="feat"><div class="fic">📝</div><div class="ftxt"><strong>تمارين شبيهة بالامتحانات الرسمية</strong><p>تحضير فعلي للفروض والامتحانات الوطنية والجهوية</p></div></div>
-        <div class="feat"><div class="fic">🔁</div><div class="ftxt"><strong>مراجعة قبل الفروض والامتحانات</strong><p>دروس مكثفة قبل كل فرض أو امتحان مهم</p></div></div>
-        <div class="feat"><div class="fic">📊</div><div class="ftxt"><strong>جميع المستويات</strong><p>الابتدائي ✅ الإعدادي ✅ الثانوي التأهيلي ✅</p></div></div>
-        <div class="feat"><div class="fic">🌍</div><div class="ftxt"><strong>لغات · دعم دراسي · تحضير للامتحانات</strong><p>فرنسية، عربية، إنجليزية وغيرها</p></div></div>
-      </div>
-    </div>
-    <div class="fi">
-      <div class="stats-box">
-        <div class="sbox"><div class="sbig" style="color:var(--red);">72</div><div class="ssmall">منشور Instagram</div></div>
-        <div class="sbox"><div class="sbig" style="color:var(--gold);font-size:24px;">1,632</div><div class="ssmall">followers</div></div>
-        <div class="sbox"><div class="sbig" style="color:#ccc;font-size:22px;">6+</div><div class="ssmall">أستاذ معتمد</div></div>
-        <div class="sbox"><div class="sbig" style="color:var(--rl);font-size:22px;">3</div><div class="ssmall">أطوار دراسية</div></div>
-      </div>
-      <div class="info-strip">
-        <div class="info-row"><span class="lbl">📍 العنوان</span><span class="val">مجموعة 4، حي مولاي رشيد<br>خلف مقهى الطالب – كازا</span></div>
-        <div class="info-row"><span class="lbl">📞 الهاتف</span><span class="val gold">0649 18 35 27</span></div>
-        <div class="info-row"><span class="lbl">📸 Instagram</span><span class="val red">@centre_am_academy</span></div>
-        <div class="info-row"><span class="lbl">🏷️ Hashtag</span><span class="val">#Amfamily</span></div>
-        <div class="info-row"><span class="lbl">⭐ Slogan</span><span class="val">أساس النجاح يبدأ من هنا</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══════ PROFESSORS ══════ -->
-<section id="profs">
-  <div class="stag fi">الفريق</div>
-  <h2 class="stitle fi">Team AM Academy</h2>
-  <p class="ssub fi">أساتذة معتمدون بأسمائهم الحقيقية – الفريق الرسمي لـ AM Academy</p>
-  <div class="profs-grid">
+  <script>
+    const form = document.getElementById('requestForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('success-msg');
 
-    <div class="pcard star fi">
-      <div class="pav" style="background:var(--red);">AM</div>
-      <div class="pname">الأستاذ أمين</div>
-      <div class="pfr">PROF AMINE</div>
-      <div class="pmat">مادة غير محددة</div>
-      <div class="pbadge">Team 1 Bac</div>
-    </div>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours...';
 
-    <div class="pcard star fi">
-      <div class="pav" style="background:#7B1515;">JW</div>
-      <div class="pname">الأستاذ جواد</div>
-      <div class="pfr">PROF JAOUAD</div>
-      <div class="pmat">الرياضيات</div>
-      <div class="pbadge">Team 1 Bac</div>
-    </div>
+      const features = [...form.querySelectorAll('input[name="features"]:checked')]
+        .map(cb => cb.value);
 
-    <div class="pcard star fi">
-      <div class="pav" style="background:#4a1212;">AJ</div>
-      <div class="pname">الأستاذ عبد الجليل</div>
-      <div class="pfr">PROF ABDEJALIL</div>
-      <div class="pmat">غير محدد</div>
-      <div class="pig">@prof_abdeljalil_elhamdani</div>
-    </div>
+      const data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        siteType: form.siteType.value,
+        budget: form.budget.value,
+        features,
+        description: form.description.value,
+      };
 
-    <div class="pcard star fi">
-      <div class="pav" style="background:#1a3a5a;">AN</div>
-      <div class="pname">الأستاذ أناس</div>
-      <div class="pfr">PROF ANAS</div>
-      <div class="pmat">اللغة الفرنسية</div>
-      <div class="pig">@prof_nigro_anas</div>
-    </div>
-
-    <div class="pcard star fi">
-      <div class="pav" style="background:#1a4a2a;">KS</div>
-      <div class="pname">الأستاذ قاصيد</div>
-      <div class="pfr">PROF KASSID</div>
-      <div class="pmat">اللغة العربية</div>
-      <div class="pbadge">Team 1 Bac</div>
-    </div>
-
-    <div class="pcard star fi">
-      <div class="pav" style="background:#3a2a1a;">AR</div>
-      <div class="pname">الأستاذ عبد الرحيم</div>
-      <div class="pfr">PROF ABDERAHIM</div>
-      <div class="pmat">مادة غير محددة</div>
-      <div class="pbadge">Team 1 Bac</div>
-    </div>
-
-    <div class="pcard fi">
-      <div class="pav" style="background:#5a1a4a;">CH</div>
-      <div class="pname">الأستاذة شيماء</div>
-      <div class="pfr">P. CHAIMAA</div>
-      <div class="pmat">SVT</div>
-      <div class="pbadge">3AC · Bac</div>
-    </div>
-
-    <div class="pcard fi">
-      <div class="pav" style="background:#1a2a4a;">AB</div>
-      <div class="pname">الأستاذ عبد الرزاق</div>
-      <div class="pfr">PROF. ABDERRAZAK</div>
-      <div class="pmat">Mathématiques</div>
-      <div class="pbadge">3AC Semestre 2</div>
-    </div>
-
-    <div class="pcard fi">
-      <div class="pav" style="background:#4a3a1a;">MH</div>
-      <div class="pname">الأستاذ محسن</div>
-      <div class="pfr">PROF. MOUHSSIN</div>
-      <div class="pmat">Physique-Chimie (PC)</div>
-      <div class="pbadge">3AC · 2Bac</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════ COURSES ══════ -->
-<section id="courses">
-  <div class="stag fi">البرامج</div>
-  <h2 class="stitle fi">جميع المستويات</h2>
-  <p class="ssub fi">الابتدائي ✅ الإعدادي ✅ الثانوي التأهيلي ✅ – سجّل دابا وضمن بلاصتك</p>
-
-  <div class="levels-tabs fi">
-    <button class="ltab active" onclick="switchLevel('primaire',this)">🎒 Primaire – ابتدائي</button>
-    <button class="ltab" onclick="switchLevel('college',this)">📖 Collège – إعدادي</button>
-    <button class="ltab" onclick="switchLevel('lycee',this)">🎓 Lycée – ثانوي</button>
-    <button class="ltab" onclick="switchLevel('langues',this)">🌍 Langues – لغات</button>
-  </div>
-
-  <div class="level-panel active fi" id="panel-primaire">
-    <div class="lgrid">
-      <div class="lcard"><div class="lem">🎒</div><div class="lfr">PRIMAIRE</div><div class="lar">المرحلة الابتدائية</div><div class="ldesc">تأسيس متين في المواد الأساسية – تحضير جيد للإعدادي</div><div class="tags"><span class="tag">الرياضيات</span><span class="tag">العربية</span><span class="tag">الفرنسية</span><span class="tag">العلوم</span></div></div>
-      <div class="lcard"><div class="lem">📅</div><div class="lfr">HORAIRES</div><div class="lar">الجدول الأسبوعي</div><div class="ldesc">5 حصص في الأسبوع من الإثنين إلى الجمعة</div><div class="tags"><span class="tag">الإثنين 20h30</span><span class="tag">الثلاثاء 19h00</span><span class="tag">الأربعاء 19h00</span><span class="tag">الخميس 19h00</span><span class="tag">الجمعة 20h30</span></div></div>
-    </div>
-  </div>
-
-  <div class="level-panel fi" id="panel-college">
-    <div class="lgrid">
-      <div class="lcard"><div class="lem">📖</div><div class="lfr">1ÈRE AC – 2ÈME AC</div><div class="lar">السلك الثاني والثالث</div><div class="ldesc">دعم لتلاميذ الإعدادي في جميع المواد الأساسية</div><div class="tags"><span class="tag">الرياضيات</span><span class="tag">الفيزياء</span><span class="tag">العربية</span><span class="tag">الفرنسية</span></div></div>
-      <div class="lcard"><div class="lem">🔬</div><div class="lfr">3ÈME AC – SEMESTRE 2</div><div class="lar">الثالثة إعدادي</div><div class="ldesc">برنامج كامل للسداسية الثانية – Math, PC, SVT</div><div class="tags"><span class="tag">Math – Prof. Abderrazak</span><span class="tag">PC – Prof. Mouhssin</span><span class="tag">SVT – P. Chaimaa</span></div></div>
-      <div class="lcard"><div class="lem">🏅</div><div class="lfr">EXAMEN RÉGIONAL</div><div class="lar">الامتحان الجهوي 2026</div><div class="ldesc">تحضير مكثف للامتحان الجهوي – #الجهوي 2026</div><div class="tags"><span class="tag">الاجتماعيات</span><span class="tag">الفرنسية</span><span class="tag">العربية</span><span class="tag">التربية الإسلامية</span></div></div>
-    </div>
-  </div>
-
-  <div class="level-panel fi" id="panel-lycee">
-    <div class="lgrid">
-      <div class="lcard"><div class="lem">🎓</div><div class="lfr">1ÈRE BAC – TOUTES FILIÈRES</div><div class="lar">الأولى باكالوريا – جميع الشعب</div><div class="ldesc">دروس الدعم والتقوية للأولى باك – الفريق الكامل</div><div class="tags"><span class="tag">Français (3 groupes)</span><span class="tag">PC</span><span class="tag">Maths</span><span class="tag">التربية الإسلامية</span><span class="tag">الاجتماعيات</span><span class="tag">العربية</span></div></div>
-      <div class="lcard"><div class="lem">🏅</div><div class="lfr">2ÈME BAC</div><div class="lar">الثانية باكالوريا</div><div class="ldesc">مواكبة مكثفة للسنة الثانية باك بجميع شعبها</div><div class="tags"><span class="tag">PC</span><span class="tag">Maths</span><span class="tag">SVT</span><span class="tag">الفلسفة</span><span class="tag">Anglais</span></div></div>
-      <div class="lcard"><div class="lem">📊</div><div class="lfr">BAC LETTRES / ÉCO</div><div class="lar">الأدبي والاقتصادي</div><div class="ldesc">مواكبة كاملة للشعب الأدبية والاقتصادية</div><div class="tags"><span class="tag">الفلسفة</span><span class="tag">التاريخ-الجغرافيا</span><span class="tag">الاقتصاد</span><span class="tag">اللغات</span></div></div>
-    </div>
-  </div>
-
-  <div class="level-panel fi" id="panel-langues">
-    <div class="lgrid">
-      <div class="lcard"><div class="lem">🇫🇷</div><div class="lfr">FRANÇAIS</div><div class="lar">اللغة الفرنسية</div><div class="ldesc">الإثنين + الأربعاء + الجمعة: 19h00 – 20h30</div><div class="tags"><span class="tag">Lundi 19h-20h30</span><span class="tag">Mercredi 19h-20h30</span><span class="tag">Vendredi 19h-20h30</span></div></div>
-      <div class="lcard"><div class="lem">🇬🇧</div><div class="lfr">ANGLAIS</div><div class="lar">اللغة الإنجليزية</div><div class="ldesc">السبت: 15h00 – 16h30 (2BAC)</div><div class="tags"><span class="tag">Samedi 15h-16h30</span><span class="tag">2ème BAC</span></div></div>
-      <div class="lcard"><div class="lem">📚</div><div class="lfr">ARABE</div><div class="lar">اللغة العربية</div><div class="ldesc">الخميس: 20h30 – 22h00 (1ère BAC)</div><div class="tags"><span class="tag">Jeudi 20h30-22h</span><span class="tag">1ère BAC</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ SCHEDULES ══════ -->
-<section id="schedules">
-  <div class="stag fi">الجداول الرسمية</div>
-  <h2 class="stitle fi">جداول الدروس</h2>
-  <p class="ssub fi">الجداول الرسمية المنشورة على Instagram – محيّنة باستمرار</p>
-
-  <div class="sched-tabs fi">
-    <button class="stab active" onclick="switchSched('primaire',this)">Primaire</button>
-    <button class="stab" onclick="switchSched('bac1',this)">1ère BAC</button>
-    <button class="stab" onclick="switchSched('bac2',this)">2ème BAC</button>
-    <button class="stab" onclick="switchSched('francais',this)">Cours Français</button>
-  </div>
-
-  <!-- Primaire -->
-  <div class="sched-panel active fi" id="sp-primaire" style="display:block;">
-    <div class="sched-box" style="max-width:400px;">
-      <div class="sched-head"><span class="flag">🎒</span> Niveau : Primaire</div>
-      <table class="sched-table">
-        <tr><td>الإثنين</td><td><span class="mat">حصة (1)</span> &nbsp;<span class="time">20h30</span></td></tr>
-        <tr><td>الثلاثاء</td><td><span class="mat">حصة (2)</span> &nbsp;<span class="time">19h00</span></td></tr>
-        <tr><td>الأربعاء</td><td><span class="mat">حصة (3)</span> &nbsp;<span class="time">19h00</span></td></tr>
-        <tr><td>الخميس</td><td><span class="mat">حصة (4)</span> &nbsp;<span class="time">19h00</span></td></tr>
-        <tr><td>الجمعة</td><td><span class="mat">حصة (5)</span> &nbsp;<span class="time">20h30</span></td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- 1ère BAC -->
-  <div class="sched-panel fi" id="sp-bac1" style="display:none;">
-    <div class="sched-box">
-      <div class="sched-head"><span class="flag">🎓</span> 1ère Année BAC – جميع الشعب</div>
-      <table class="sched-table">
-        <tr><td>الإثنين</td><td><span class="mat">Gr1 Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td></td><td><span class="mat">Gr2 Français</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td></td><td><span class="mat">Gr1 Physique-Chimie</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td>الثلاثاء</td><td><span class="mat">الاجتماعيات</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td></td><td><span class="mat">Maths</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td>الأربعاء</td><td><span class="mat">Gr1 Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td></td><td><span class="mat">Gr2 Français</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td></td><td><span class="mat">التربية الإسلامية</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td>الخميس</td><td><span class="mat">العربية</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td>الجمعة</td><td><span class="mat">Gr2 Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td></td><td><span class="mat">Gr1 Français</span> <span class="time">20h30 – 22h00</span></td></tr>
-      </table>
-    </div>
-    <div></div>
-  </div>
-
-  <!-- 2ème BAC -->
-  <div class="sched-panel fi" id="sp-bac2" style="display:none;">
-    <div class="sched-box">
-      <div class="sched-head"><span class="flag">🏅</span> 2ème Année BAC</div>
-      <table class="sched-table">
-        <tr><td>الإثنين</td><td><span class="mat">PC</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td>الثلاثاء</td><td><span class="mat">Maths</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td></td><td><span class="mat">SVT</span> <span class="time">20h30 – 22h00</span></td></tr>
-        <tr><td>الأربعاء</td><td><span class="mat">PC</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td>الخميس</td><td><span class="mat">Maths</span> <span class="time">19h00 – 21h30</span></td></tr>
-        <tr><td>الجمعة</td><td><span class="mat">الفلسفة</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td>السبت</td><td><span class="mat">Anglais</span> <span class="time">15h00 – 16h30</span></td></tr>
-        <tr><td></td><td><span class="mat">SVT</span> <span class="time">16h30 – 18h00</span></td></tr>
-      </table>
-    </div>
-    <div></div>
-  </div>
-
-  <!-- Français -->
-  <div class="sched-panel fi" id="sp-francais" style="display:none;">
-    <div class="sched-box" style="max-width:400px;">
-      <div class="sched-head"><span class="flag">🇫🇷</span> Horaires des cours de Français</div>
-      <table class="sched-table">
-        <tr><td>Lundi</td><td><span class="mat">Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td>Mercredi</td><td><span class="mat">Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-        <tr><td>Vendredi</td><td><span class="mat">Français</span> <span class="time">19h00 – 20h30</span></td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="sched-note fi">
-    📞 للتسجيل وتأكيد المجموعة: <strong style="color:var(--gold);margin-right:6px;"> 0649 18 35 27</strong> — حي مولاي رشيد، مجموعة 4، خلف مقهى الطالب
-  </div>
-</section>
-
-<!-- ══════ PROGRAMMES 3AC ══════ -->
-<section id="programmes">
-  <div class="stag fi">البرامج الدراسية</div>
-  <h2 class="stitle fi">Programme 3AC – Semestre 2</h2>
-  <p class="ssub fi">البرامج المفصلة للثالثة إعدادي – السداسية الثانية</p>
-  <div class="prog-grid">
-    <div class="prog-card fi">
-      <div class="prog-head">
-        <h3>MATHÉMATIQUES</h3>
-        <div class="prof-name">Prof. Abderrazak</div>
-        <span class="matiere">3AC · Semestre 2</span>
-      </div>
-      <div class="prog-list">
-        <div class="prog-item"><span class="prog-num">1.</span>Équations et inéquations</div>
-        <div class="prog-item"><span class="prog-num">2.</span>Vecteurs et translation</div>
-        <div class="prog-item"><span class="prog-num">3.</span>Le repère dans le plan</div>
-        <div class="prog-item"><span class="prog-num">4.</span>Équation d'une droite</div>
-        <div class="prog-item"><span class="prog-num">5.</span>Les systèmes</div>
-        <div class="prog-item"><span class="prog-num">6.</span>Fonction linéaire et affine</div>
-        <div class="prog-item"><span class="prog-num">7.</span>Statistiques</div>
-        <div class="prog-item"><span class="prog-num">8.</span>Géométrie dans l'espace</div>
-      </div>
-    </div>
-    <div class="prog-card fi">
-      <div class="prog-head">
-        <h3>PHYSIQUE-CHIMIE</h3>
-        <div class="prof-name">Prof. Mouhssin</div>
-        <span class="matiere">3AC · Semestre 2</span>
-      </div>
-      <div class="prog-list">
-        <div class="prog-item"><span class="prog-num">1.</span>Le mouvement et le repos</div>
-        <div class="prog-item"><span class="prog-num">2.</span>La vitesse moyenne</div>
-        <div class="prog-item"><span class="prog-num">3.</span>Les actions mécaniques</div>
-        <div class="prog-item"><span class="prog-num">4.</span>Les forces</div>
-        <div class="prog-item"><span class="prog-num">5.</span>Équilibre d'un solide soumis à deux forces</div>
-        <div class="prog-item"><span class="prog-num">6.</span>Le poids et la masse</div>
-        <div class="prog-item"><span class="prog-num">7.</span>La loi d'Ohm</div>
-        <div class="prog-item"><span class="prog-num">8.</span>La puissance électrique</div>
-        <div class="prog-item"><span class="prog-num">9.</span>L'énergie électrique</div>
-      </div>
-    </div>
-    <div class="prog-card fi">
-      <div class="prog-head">
-        <h3>SVT</h3>
-        <div class="prof-name">P. Chaimaa</div>
-        <span class="matiere">3AC · Semestre 2</span>
-      </div>
-      <div class="prog-list">
-        <div class="prog-item"><span class="prog-num">1.</span>Système nerveux</div>
-        <div class="prog-item"><span class="prog-num">2.</span>Système musculaire</div>
-        <div class="prog-item"><span class="prog-num">3.</span>Les microbes</div>
-        <div class="prog-item"><span class="prog-num">4.</span>Le système immunitaire</div>
-        <div class="prog-item"><span class="prog-num">5.</span>Dysfonctionnement du système immunitaire</div>
-        <div class="prog-item"><span class="prog-num">6.</span>Transfusion sanguine</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ INSCRIPTION ══════ -->
-<section id="inscription" style="background:var(--dark);">
-  <div style="text-align:center;">
-    <div class="stag fi">سجّل الآن</div>
-    <h2 class="stitle fi">سجّل دابا وضمن بلاصتك</h2>
-    <p class="ssub fi" style="margin:0 auto;">أرسل بياناتك أو اتصل مباشرة على 0649 18 35 27</p>
-  </div>
-  <div class="fwrap">
-    <div class="fbox fi">
-      <form id="rform">
-        <div class="fgrid">
-          <div class="fg"><label>الاسم الكامل *</label><input type="text" name="nom" placeholder="اسمك الكامل" required></div>
-          <div class="fg"><label>رقم الهاتف *</label><input type="tel" name="telephone" placeholder="0649 18 35 27 📞" required></div>
-          <div class="fg"><label>البريد الإلكتروني</label><input type="email" name="email" placeholder="email@exemple.com"></div>
-          <div class="fg">
-            <label>المستوى الدراسي *</label>
-            <select name="niveau" required>
-              <option value="">اختر المستوى...</option>
-              <option value="primaire">ابتدائي – Primaire</option>
-              <option value="1ac">السلك الإعدادي – 1AC/2AC</option>
-              <option value="3ac">الثالثة إعدادي – 3AC</option>
-              <option value="bac1">الأولى باك – 1ère BAC</option>
-              <option value="bac2-sciences">الثانية باك علوم – 2BAC Sciences</option>
-              <option value="bac2-lettres">الثانية باك أدبي/اقتصادي</option>
-              <option value="langues">دروس اللغات</option>
-            </select>
-          </div>
-          <div class="fg"><label>المادة المطلوبة</label><input type="text" name="matiere" placeholder="مثال: Maths, Français, SVT..."></div>
-          <div class="fg">
-            <label>المجموعة المفضلة</label>
-            <select name="groupe">
-              <option value="">أي مجموعة...</option>
-              <option value="gr1">Groupe 1</option>
-              <option value="gr2">Groupe 2</option>
-              <option value="soir">مساء (19h00)</option>
-              <option value="soir2">مساء (20h30)</option>
-            </select>
-          </div>
-          <div class="fg full"><label>ملاحظات</label><textarea name="notes" placeholder="أي معلومات إضافية..."></textarea></div>
-        </div>
-        <button type="submit" class="fbtn">إرسال الطلب ✓</button>
-        <div class="fok" id="fok">✅ تم الإرسال! سيتواصل معك الفريق قريباً.</div>
-      </form>
-      <div class="fphone-note">أو اتصل مباشرة: <span>0649 18 35 27</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ INSTAGRAM ══════ -->
-<section id="insta" style="background:var(--d2);">
-  <div class="stag fi" style="text-align:center;">Instagram</div>
-  <h2 class="stitle fi" style="text-align:center;">تابعونا على Instagram</h2>
-  <div class="ig-prof fi">
-    <div class="igav">AM</div>
-    <div>
-      <div class="igname">Cours Du Soir Am Academy</div>
-      <div class="ighandle">@centre_am_academy · École</div>
-      <div class="igmet">
-        <div class="igm"><strong>72</strong><span>publications</span></div>
-        <div class="igm"><strong>1,632</strong><span>followers</span></div>
-        <div class="igm"><strong>77</strong><span>suivi(e)s</span></div>
-      </div>
-      <div class="igbio">✨ الأوائل في دروس الدعم و التقوية لجميع المستويات<br>👨‍🏫 نخبة من الأساتذة المعتمدين<br>📍 الدار البيضاء – حي مولاي رشيد</div>
-      <a href="https://www.instagram.com/centre_am_academy/" target="_blank" class="iglink">متابعة ↗</a>
-    </div>
-  </div>
-  <div class="ig-highlights fi">
-    <div class="highlight"><div>🏆</div>النجاح مع am</div>
-    <div class="highlight"><div>🎉</div>الفرحة والسرور</div>
-    <div class="highlight"><div>🏫</div>am academy</div>
-    <div class="highlight"><div>☀️</div>العطلة 2</div>
-    <div class="highlight"><div>⭐</div>نقط كاينة</div>
-  </div>
-</section>
-
-<!-- ══════ CONTACT ══════ -->
-<section id="contact" style="background:var(--dark);">
-  <div class="stag fi">اتصل بنا</div>
-  <h2 class="stitle fi">التواصل والتسجيل</h2>
-  <div class="cgrid">
-    <div class="clist">
-      <div class="ci fi">
-        <div class="cic">📍</div>
-        <div>
-          <strong>العنوان الكامل</strong>
-          <p>حي مولاي رشيد – مجموعة 4<br>خلف مقهى الطالب<br>الدار البيضاء – Casablanca</p>
-        </div>
-      </div>
-      <div class="ci fi">
-        <div class="cic">📞</div>
-        <div>
-          <strong>للتواصل والتسجيل</strong>
-          <p style="font-family:'Barlow Condensed',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px;">0649 18 35 27</p>
-        </div>
-      </div>
-      <div class="ci fi">
-        <div class="cic">📸</div>
-        <div>
-          <strong>Instagram</strong>
-          <p><a href="https://www.instagram.com/centre_am_academy/" target="_blank">@centre_am_academy</a><br>
-          Profs: <a href="https://www.instagram.com/prof_nigro_anas/" target="_blank">@prof_nigro_anas</a> · <a href="https://www.instagram.com/prof_abdeljalil_elhamdani/" target="_blank">@prof_abdeljalil_elhamdani</a></p>
-        </div>
-      </div>
-      <div class="ci fi">
-        <div class="cic">🕐</div>
-        <div>
-          <strong>أوقات الدروس</strong>
-          <p>من الإثنين إلى الجمعة: 19h00 – 22h00<br>السبت: 15h00 – 18h00<br>Cours du Soir – دروس المساء</p>
-        </div>
-      </div>
-    </div>
-    <div class="mapbox fi">
-      <div style="font-size:44px;">📍</div>
-      <div class="map-addr">حي مولاي رشيد – مجموعة 4<br>خلف مقهى الطالب<br>الدار البيضاء</div>
-      <a href="https://maps.app.goo.gl/k82E7Btg85HKHosw9" target="_blank" class="mapbtn">فتح في خرائط Google ↗</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-phone">📞 0649 18 35 27</div>
-  <div style="margin-bottom:8px;"><strong>AM Academy</strong> · Cours du Soir · Centre de Soutien et Langues · #Amfamily</div>
-  <div style="margin-bottom:6px;">📍 حي مولاي رشيد – مجموعة 4 – خلف مقهى الطالب – الدار البيضاء</div>
-  <div style="margin-bottom:6px;"><a href="https://www.instagram.com/centre_am_academy/" target="_blank">@centre_am_academy</a> · 1,632 followers</div>
-  <div style="color:#333;margin-top:12px;">© 2025 AM Academy. أساس النجاح يبدأ من هنا.</div>
-</footer>
-
-<div id="notif"></div>
-
-<script>
-// Scroll reveal
-const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('v')),{threshold:.07});
-document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
-
-// Counter
-function animCount(el,target,dur=1600){
-  let n=0;const step=target/(dur/16);
-  const t=setInterval(()=>{n=Math.min(n+step,target);el.textContent='+'+Math.floor(n);if(n>=target)clearInterval(t);},16);
-}
-fetch('/api/stats').then(r=>r.json()).then(d=>{
-  animCount(document.getElementById('cnt'),d.total_inscriptions||0);
-}).catch(()=>animCount(document.getElementById('cnt'),120));
-
-// Level tabs
-function switchLevel(id,btn){
-  document.querySelectorAll('.level-panel').forEach(p=>{p.style.display='none';p.classList.remove('active');});
-  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
-  const panel=document.getElementById('panel-'+id);
-  panel.style.display='block'; panel.classList.add('active');
-  btn.classList.add('active');
-}
-
-// Schedule tabs
-function switchSched(id,btn){
-  document.querySelectorAll('.sched-panel').forEach(p=>{p.style.display='none';});
-  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sp-'+id).style.display='grid';
-  if(id==='primaire'||id==='francais') document.getElementById('sp-'+id).style.display='block';
-  btn.classList.add('active');
-}
-
-// Form
-document.getElementById('rform').addEventListener('submit',async function(e){
-  e.preventDefault();
-  const btn=this.querySelector('.fbtn');btn.textContent='جاري الإرسال...';btn.disabled=true;
-  const data=Object.fromEntries(new FormData(this));
-  try{
-    const res=await fetch('/api/inscriptions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    if(res.ok){this.reset();document.getElementById('fok').style.display='block';notify('✅ تم الإرسال! سيتواصل معك الفريق قريباً.',true);}
-    else notify('❌ خطأ، حاول مجدداً');
-  }catch{notify('❌ تعذر الاتصال بالخادم');}
-  btn.textContent='إرسال الطلب ✓';btn.disabled=false;
-});
-
-function notify(msg,ok=false){
-  const n=document.getElementById('notif');n.textContent=msg;n.className=ok?'ok':'';
-  n.style.display='flex';setTimeout(()=>n.style.display='none',5000);
-}
-</script>
+      try {
+        const res = await fetch('/api/requests', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          throw new Error('Erreur serveur');
+        }
+      } catch (err) {
+        alert('Erreur lors de l'envoi. Vérifiez que le serveur est démarré.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer Ma Demande →';
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
-  "name": "am-academy",
+  "name": "webcraft-ma",
   "version": "1.0.0",
-  "description": "Site web AM Academy – Centre de Soutien et Langues, Casablanca",
+  "description": "WebCraft MA — Site freelance avec SQLite",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,11 +13,9 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.1"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "keywords": ["am-academy", "casablanca", "education", "soutien"],
-  "author": "AM Academy"
+  }
 }
